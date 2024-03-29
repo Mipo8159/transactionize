@@ -1,0 +1,29 @@
+{
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "@app/common/(.*)": "<rootDir>/../libs/common/src/$1",
+    "@app/common": "<rootDir>/../libs/common/src",
+    "@app/entities/(.*)": "<rootDir>/../libs/entities/src/$1",
+    "@app/entities": "<rootDir>/../libs/entities/src",
+    "@app/services/(.*)": "<rootDir>/../libs/services/src/$1",
+    "@app/services": "<rootDir>/../libs/services/src",
+    "@app/tokens/(.*)": "<rootDir>/../libs/tokens/src/$1",
+    "@app/tokens": "<rootDir>/../libs/tokens/src",
+    "@app/repositories/(.*)": "<rootDir>/../libs/repositories/src/$1",
+    "@app/repositories": "<rootDir>/../libs/repositories/src",
+    "@app/base/(.*)": "<rootDir>/../libs/base/src/$1",
+    "@app/base": "<rootDir>/../libs/base/src",
+    "@app/dto/(.*)": "<rootDir>/../libs/dto/src/$1",
+    "@app/dto": "<rootDir>/../libs/dto/src"
+  }
+}

@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build
+    container_name: api
+    environment:
+      NODE_ENV: development
+      SERVER_PORT: '${SERVER_PORT}'
+      POSTGRES_NAME: '${POSTGRES_NAME}'
+      POSTGRES_PASS: '${POSTGRES_PASS}'
+      POSTGRES_PORT: '${POSTGRES_PORT}'
+      POSTGRES_HOST: '${POSTGRES_HOST}'
+      POSTGRES_DB: '${POSTGRES_DB}'
+      DB_URL: 'postgresql://${POSTGRES_NAME}:${POSTGRES_PASS}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}'
+    volumes:
+      - /usr/src/app/node_modules
+      - .:/usr/src/app
+    depends_on:
+      - pg
+    ports:
+      - '${SERVER_PORT}:${SERVER_PORT}'
+    networks:
+      - my-app
+
+  pg:
+    image: postgres:14.1-alpine
+    restart: always
+    container_name: pg
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: '${POSTGRES_NAME}'
+      POSTGRES_PASSWORD: '${POSTGRES_PASS}'
+      POSTGRES_DB: '${POSTGRES_DB}'
+    ports:
+      - '${POSTGRES_PORT}:5432'
+    networks:
+      - my-app
+
+networks:
+  my-app:
+    driver: bridge
+volumes:
+  db:
+    driver: local
